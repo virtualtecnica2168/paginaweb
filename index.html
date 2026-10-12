@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard de aprendizaje: Materiales de Ingeniería</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#1d2a3a;--mut:#5b6b7e;--pri:#1f5fae;--acc:#0e9f8e;--ok:#e3f6ec;--okb:#1d9a5b;--bad:#fdeaea;--badb:#c93b3b;--ln:#d9e1ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(120deg,#12396b,#1f5fae 60%,#0e9f8e);color:#fff;padding:18px 24px}
+header h1{margin:0 0 4px;font-size:1.5rem}
+header p{margin:0;opacity:.9;font-size:.95rem}
+.bar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.prog{flex:1;min-width:220px;background:rgba(255,255,255,.25);border-radius:99px;height:12px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:#fff;transition:width .4s}
+.stat{font-size:.9rem}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--ln);display:flex;gap:6px;padding:8px 16px;overflow-x:auto}
+nav button,.btn{border:1px solid var(--ln);background:#fff;color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:.9rem;white-space:nowrap}
+nav button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.btn.p{background:var(--pri);color:#fff;border-color:var(--pri)}
+.btn:hover,nav button:hover{filter:brightness(.96)}
+main{max-width:1150px;margin:0 auto;padding:20px}
+section{display:none}section.on{display:block}
+h2{color:#12396b;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 1px 3px rgba(20,40,80,.06)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.tag{display:inline-block;background:#e6f0fb;color:var(--pri);border-radius:6px;padding:2px 8px;font-size:.75rem;font-weight:600;margin-bottom:6px}
+.warn{background:#fff8e1;border-left:4px solid #e0a800;padding:10px 14px;border-radius:6px;font-size:.9rem}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border:1px solid var(--ln);background:#fafcff;border-radius:8px;cursor:pointer;font-size:.95rem}
+.opt:hover:enabled{border-color:var(--pri)}
+.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.bad{background:var(--bad);border-color:var(--badb)}
+.opt:disabled{cursor:default;color:inherit}
+.fb{margin-top:8px;font-size:.92rem}.fb.ok{color:#145c37}.fb.bad{color:#8e2323}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.84rem;min-width:900px}
+th,td{border:1px solid var(--ln);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#eaf1fa;position:sticky;top:0}
+.chips button{margin:2px}.chips .on{background:var(--acc);color:#fff;border-color:var(--acc)}
+input,select,textarea{padding:8px;border:1px solid var(--ln);border-radius:8px;font:inherit;max-width:100%}
+textarea{width:100%;min-height:70px}
+.res{background:#eef7f5;border-radius:8px;padding:10px;margin-top:8px}
+ul{padding-left:20px}
+.docente{border:2px dashed #7b4fb3;background:#f8f3fd}
+footer{max-width:1150px;margin:10px auto 30px;padding:0 20px}
+.aviso{background:#12396b;color:#fff;border-radius:10px;padding:14px;font-size:.9rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media print{header .tools,nav,.btn,.opt:not(.ok){display:none}section{display:block!important;page-break-inside:avoid}body{background:#fff}.card{box-shadow:none}.tbl{overflow:visible}table{min-width:0;font-size:.7rem}header{background:#fff!important;color:#000}}
+</style>
+</head>
+<body>
+<header>
+<h1>Selección de materiales para máquinas y equipos industriales</h1>
+<p>Materiales de Ingeniería · Ingeniería Industrial · II semestre</p>
+<div class="bar">
+<div class="prog"><i id="pb"></i></div>
+<div class="stat" id="st"></div>
+<div class="tools"><button class="btn" onclick="window.print()">🖨 Imprimir / Guardar PDF</button><button class="btn" onclick="resetAll()">↺ Reiniciar</button></div>
+</div>
+</header>
+<nav id="nav"></nav>
+<main>
+
+<section id="s0">
+<h2>1. ¿Por qué importa elegir bien el material?</h2>
+<div class="card"><p>Un eje que se fatiga, una tubería que se corroe o un buje que se desgasta no son solo fallas técnicas: detienen la producción, elevan costos de mantenimiento y pueden poner en riesgo a las personas. El material determina cuánto pesa una pieza, cuánto dura, cuánto cuesta fabricarla y qué pasa cuando falla. Elegir es equilibrar <b>requisitos mecánicos, ambiente de servicio, costo, fabricación y seguridad</b>; casi nunca existe un material perfecto, sino el más adecuado para unas condiciones dadas.</p></div>
+<div class="card"><h3>Objetivos de aprendizaje</h3><ul>
+<li>Diferenciar límite de fluencia, resistencia máxima a la tracción y dureza, e identificar cuándo no aplican.</li>
+<li>Comparar metales, cerámicos, polímeros, compuestos y biomateriales según propiedades, costo y limitaciones.</li>
+<li>Calcular masa (ρ·V), costo de material y factor de seguridad con unidades correctas.</li>
+<li>Seleccionar un material para un caso industrial y justificar la decisión con evidencia y riesgos.</li>
+</ul></div>
+<div class="warn"><b>Ruta sugerida:</b> Conceptos → Familias → Comparativa → Ejercicios → Casos → Reto final → Síntesis. Los valores son rangos orientativos que dependen de aleación, tratamiento, proceso y condiciones de servicio; verifica siempre en fichas técnicas.</div>
+</section>
+
+<section id="s1">
+<h2>2. Conceptos fundamentales</h2>
+<div class="grid">
+<div class="card"><span class="tag">Esfuerzo</span><h3>Fluencia vs. resistencia máxima</h3><p><b>Límite de fluencia (σy):</b> esfuerzo donde empieza la deformación plástica permanente. Pasado ese punto, la pieza ya no vuelve a su forma. Es el criterio habitual de diseño en metales dúctiles.</p><p><b>Resistencia máxima a la tracción (UTS):</b> el mayor esfuerzo ingenieril alcanzado antes de la rotura. Siempre es mayor o igual que σy.</p></div>
+<div class="card"><svg viewBox="0 0 300 190" width="100%" role="img" aria-label="Curvas esfuerzo-deformación"><line x1="30" y1="160" x2="290" y2="160" stroke="#555"/><line x1="30" y1="160" x2="30" y2="10" stroke="#555"/>
+<polyline fill="none" stroke="#1f5fae" stroke-width="2.5" points="30,160 60,90 80,70 140,55 200,48 250,70"/><circle cx="80" cy="70" r="4" fill="#c93b3b"/><text x="86" y="82" font-size="10" fill="#c93b3b">σy</text><circle cx="200" cy="48" r="4" fill="#0e9f8e"/><text x="205" y="42" font-size="10" fill="#0e9f8e">UTS</text><text x="200" y="100" font-size="10" fill="#1f5fae">Metal dúctil</text>
+<polyline fill="none" stroke="#7b4fb3" stroke-width="2.5" points="30,160 100,40"/><text x="104" y="38" font-size="10" fill="#7b4fb3">Cerámica frágil: rompe sin fluencia</text><text x="140" y="180" font-size="10">Deformación →</text><text x="2" y="14" font-size="10">σ</text></svg></div>
+<div class="card"><span class="tag">Sin fluencia definida</span><h3>¿Y si no hay σy?</h3><p>Las cerámicas técnicas y los compuestos de matriz frágil se rompen antes de fluir. Se usan <b>resistencia a flexión (módulo de ruptura)</b>, <b>resistencia a compresión</b> y tenacidad a la fractura. Algunos polímeros muestran un punto de fluencia, otros no, y dependen de temperatura, humedad y velocidad. <b>No se inventa un σy equivalente.</b></p></div>
+<div class="card"><span class="tag">Dureza</span><h3>Dureza y método</h3><p>Mide resistencia a la penetración, no es una propiedad única: <b>HB</b> (Brinell, aceros blandos y fundiciones), <b>HRC/HRB</b> (Rockwell, aceros tratados/blandos), <b>HV</b> (Vickers, cerámicos y recubrimientos), <b>Shore</b> (polímeros). Las escalas no se comparan directamente.</p></div>
+<div class="card"><span class="tag">Otras ideas</span><h3>Densidad, tenacidad, fatiga</h3><p><b>Densidad (ρ):</b> masa por volumen (g/cm³ = 1000 kg/m³). <b>Tenacidad:</b> energía absorbida antes de romper (impacto). <b>Fatiga:</b> falla por cargas repetidas, aun bajo σy. Dureza alta no implica tenacidad.</p></div>
+<div class="card"><span class="tag">Seguridad</span><h3>Factor de seguridad</h3><p>FS = σ límite / σ de trabajo. En dúctiles, σ límite ≈ σy. Con FS = 1 no hay margen ante incertidumbres de carga, material o fabricación. El FS necesario depende de la consecuencia de la falla, la incertidumbre y las normas aplicables.</p></div>
+</div>
+<div class="grid">
+<div class="card"><h3>🧮 Calculadora de masa y costo de material</h3>
+<label>Material <select id="cm"></select></label><br><br><label>Volumen (cm³) <input type="number" id="cv" value="1000" min="1" style="width:110px"></label>
+<div class="res" id="cr"></div><small>m (kg) = ρ (g/cm³) × V (cm³) / 1000. Cuesta solo materia prima en COP/kg; no incluye mecanizado ni tratamientos.</small></div>
+<div class="card"><h3>🧮 Calculadora de factor de seguridad</h3>
+<label>Material <select id="fm"></select></label><br><br><label>Fuerza axial F (N) <input type="number" id="ff" value="30000" min="1" style="width:110px"></label> <label>Área A (mm²) <input type="number" id="fa" value="200" min="1" style="width:90px"></label>
+<div class="res" id="fr"></div><small>σ (MPa) = F (N) / A (mm²). Usa el valor mínimo del rango de σy; es un ejercicio simplificado de tracción.</small></div>
+</div>
+</section>
+
+<section id="s2">
+<h2>3. Explora las cinco familias</h2>
+<div class="chips" id="ft"></div>
+<div class="card" id="fp"></div>
+<div class="warn">Los materiales biomédicos se distinguen por su uso (biocompatibilidad, resistencia a fluidos corporales, esterilización), no por su naturaleza: pueden ser metálicos, cerámicos, poliméricos o compuestos.</div>
+</section>
+
+<section id="s3">
+<h2>4. Tabla comparativa</h2>
+<div class="card"><div class="chips" id="tc"></div><br><label>Ordenar por <select id="to"><option value="0">Orden original</option><option value="1">Densidad (menor a mayor)</option><option value="2">Costo medio COP/kg (menor a mayor)</option></select></label>
+<div class="tbl"><table><thead><tr><th>Material</th><th>Familia</th><th>Condición</th><th>σy (MPa)</th><th>UTS o alternativa (MPa)</th><th>Dureza (método)</th><th>ρ (g/cm³)</th><th>Materia prima (COP/kg)</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+<div class="warn"><b>Importante:</b> valores representativos y aproximados, válidos para la composición y condición indicadas. Los precios son estimaciones orientativas del mercado colombiano, no cotizaciones; varían con presentación, cantidad, proveedor y tasa de cambio. El costo de una pieza incluye además fabricación, mecanizado y acabado. Donde no hay dato fiable, se indica.</div>
+</section>
+
+<section id="s4">
+<h2>5. Ejercicios progresivos</h2>
+<p>Avanzan de comprender a calcular, analizar y justificar. Si fallas, lee la explicación y vuelve a intentarlo (el segundo intento suma menos, pero lo importante es entender el principio).</p>
+<div id="ex"></div>
+</section>
+
+<section id="s5">
+<h2>6. Actividad central: casos de selección</h2>
+<p>Estrategia: aprendizaje basado en casos. Analiza condiciones de servicio, elige el material y luego redacta tu justificación.</p>
+<div id="cs"></div>
+</section>
+
+<section id="s6">
+<h2>7. Reto integrador</h2>
+<div class="card"><span class="tag">Transferencia</span><h3>Carcasa protectora para un reductor en una planta de alimentos</h3>
+<p><b>Condiciones:</b> lavado diario con agua a presión y detergentes, temperatura máxima 60 °C, golpes ocasionales de carros de transporte, volumen de material por pieza 3.000 cm³, lote de 200 piezas. Debe ser higiénica, durable y segura para operarios.</p>
+<label>Material recomendado <select id="rm"><option value="">— Elige —</option></select></label>
+<div class="res" id="rc">Selecciona un material para ver masa y costo por pieza y por lote.</div><br>
+<label><b>Justificación</b> (propiedades, datos, limitaciones, riesgos)</label><textarea id="rj"></textarea>
+<label><b>¿En qué condiciones otra alternativa sería preferible?</b></label><textarea id="ra"></textarea>
+<p><b>Autoevaluación:</b></p>
+<div id="rr"></div><br>
+<button class="btn p" onclick="reto()">Enviar reto</button><div class="fb" id="rf"></div></div>
+</section>
+
+<section id="s7">
+<h2>8. Síntesis de aprendizajes</h2>
+<div class="card"><ul>
+<li>No existe el mejor material en abstracto: se elige según función, ambiente, costo y consecuencia de falla.</li>
+<li>σy marca el inicio de la deformación permanente; UTS, la carga máxima antes de romper. En cerámicas se usan flexión y compresión.</li>
+<li>La dureza depende del método y no equivale a tenacidad. Los materiales muy duros suelen ser frágiles.</li>
+<li>La masa se obtiene con ρ·V, y el costo de materia prima con masa × COP/kg; el costo real incluye fabricación.</li>
+<li>El factor de seguridad se interpreta con la incertidumbre y las consecuencias de la falla.</li>
+<li>Los biomateriales exigen biocompatibilidad, resistencia a la corrosión y esterilización, además de resistencia mecánica.</li>
+<li>Una buena decisión se justifica con datos y reconoce cuándo otra alternativa sería mejor.</li>
+</ul><div class="res" id="sy"></div></div>
+</section>
+
+<section id="s8">
+<h2>Panel para el docente</h2>
+<div class="card docente">
+<h3>Tema y objetivos</h3><p>Propiedades y selección de materiales metálicos, cerámicos, poliméricos, compuestos y biomédicos. Objetivos: ver sección 1.</p>
+<h3>Competencias y conocimientos</h3><ul><li>Interpretación de datos técnicos y unidades; cálculos de masa, costo y FS.</li><li>Pensamiento crítico y toma de decisiones con criterios múltiples; comunicación técnica.</li></ul>
+<h3>Estrategia didáctica</h3><p>Aprendizaje activo basado en casos con evaluación formativa: explicación breve, exploración guiada, ejercicios progresivos con reintento, casos con justificación escrita y reto integrador con autoevaluación.</p>
+<h3>Secuencia sugerida (≈ 90–120 min)</h3><ol><li>Contexto y objetivos (10 min).</li><li>Conceptos y calculadoras (20 min).</li><li>Familias y tabla (20 min).</li><li>Ejercicios (15 min).</li><li>Casos en parejas y discusión (30 min).</li><li>Reto y síntesis (20 min).</li></ol>
+<h3>Evidencias observables</h3><ul><li>Cálculos con unidades correctas; elección acompañada de propiedad y dato.</li><li>Mención de limitaciones y consecuencias de la falla; justificación escrita y condición alternativa.</li></ul>
+<h3>Orientar la discusión</h3><ul><li>Pida que defiendan por qué descartan cada alternativa.</li><li>Cambie una condición (temperatura, impacto, presupuesto) y pregunte si la decisión cambia.</li><li>Contraste costo por kg con costo por pieza y con costo de falla.</li></ul>
+<h3>Errores conceptuales frecuentes</h3><ul><li><b>"Más duro es mejor":</b> contraponga dureza y tenacidad con el caso del eje frente a la alúmina.</li><li><b>Confundir σy con UTS:</b> use la gráfica esfuerzo-deformación.</li><li><b>Asignar σy a cerámicas:</b> insista en flexión y compresión.</li><li><b>Errores de unidades en g/cm³ y kg:</b> haga conversiones explícitas.</li><li><b>Elegir solo por precio por kg:</b> compare por pieza y por ciclo de vida.</li></ul>
+<h3>Posibles ampliaciones</h3><p>Índices de material (resistencia/densidad), diagramas de Ashby, tratamientos térmicos, costos de ciclo de vida, normas (ASTM, ISO) y laboratorio de dureza y tracción.</p>
+<h3>Uso responsable de la inteligencia artificial</h3><p>Las respuestas de una IA pueden contener errores. Los datos técnicos y económicos deben verificarse en fichas técnicas, normas y cotizaciones. El docente conserva la responsabilidad de revisar, contextualizar y validar este recurso.</p>
+</div>
+</section>
+</main>
+<footer><div class="aviso">Esta experiencia de aprendizaje fue generada con apoyo de inteligencia artificial y debe ser revisada, contextualizada y validada por el docente JUAN CARLOS CARRASCO antes de su aplicación.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const SEC=['Inicio','Conceptos','Familias','Comparativa','Ejercicios','Casos','Reto final','Síntesis','👩‍🏫 Docente'];
+const M=[
+['Acero al carbono AISI 1045','Metálico','Laminado en caliente / normalizado','310–450','565–700','160–210 HB (Brinell)','7,85','5.000–9.000',7.85,5000,9000,310],
+['Acero inoxidable AISI 304','Metálico','Recocido','205–250','515–620','≤ 92 HRB (Rockwell B)','7,9–8,0','12.000–22.000',7.93,12000,22000,205],
+['Aluminio 6061-T6','Metálico','Solubilizado y envejecido','240–275','290–310','≈ 95 HB','2,70','12.000–22.000',2.7,12000,22000,240],
+['Fundición gris ASTM A48 clase 30','Metálico','Colada','No definido (frágil)','≈ 210 mín. (tracción)','180–230 HB','7,2','3.500–7.000',7.2,3500,7000,null],
+['Alúmina (Al₂O₃) 96–99 %','Cerámico','Sinterizada','No presenta fluencia','Tracción baja y dispersa; flexión 300–400; compresión > 2.000','1.400–1.800 HV (Vickers)','3,7–3,9','Sin dato fiable (se cotiza por pieza)',3.8,null,null,null],
+['Zirconia Y-TZP','Cerámico','Sinterizada','No presenta fluencia','Flexión 900–1.200','≈ 1.200 HV','≈ 6,0','Sin dato fiable (se cotiza por pieza)',6.0,null,null,null],
+['Carburo de tungsteno–cobalto (6–10 % Co)','Compuesto (cermet)','Sinterizado','No presenta fluencia','Flexión (TRS) 1.500–2.500','1.300–1.600 HV','14,5–15','200.000–500.000',14.8,200000,500000,null],
+['Poliamida 66 (nailon)','Polimérico','Seca, ensayo de tracción a 23 °C','≈ 55–80 (varía con humedad)','70–85','≈ 115 Rockwell R / ≈ 80 Shore D','1,14','10.000–18.000',1.14,10000,18000,null],
+['Polietileno HDPE (PE100)','Polimérico','Extruido, 23 °C','20–30','20–35','60–70 Shore D','0,95','5.000–9.000',0.95,5000,9000,null],
+['PEEK sin refuerzo','Polimérico','Moldeado, 23 °C','≈ 90–100','90–100','≈ 85 Shore D','1,30','300.000–800.000',1.3,300000,800000,null],
+['GFRP: fibra de vidrio E / epoxi','Compuesto','Laminado, 40–50 % fibra (vol.), en dirección de fibras','No presenta fluencia (elástico-frágil)','200–500','No se usa como comparador (propiedad de superficie de resina)','1,7–2,0','10.000–30.000 (solo insumos)',1.85,10000,30000,null],
+['CFRP: fibra de carbono / epoxi','Compuesto','Unidireccional, ≈ 60 % fibra (vol.)','No presenta fluencia','1.000–2.000 (dir. fibras)','No se usa; se evalúan rigidez y delaminación','1,5–1,6','150.000–500.000 (fibra/preimpregnado)',1.55,150000,500000,null],
+['Ti-6Al-4V ELI','Biomédico (metálico)','Recocido, grado implante','795–880','860–950','30–36 HRC','4,43','300.000–700.000 (grado implante)',4.43,300000,700000,795],
+['Acero inoxidable 316L (implante)','Biomédico (metálico)','Recocido','170–300','480–620','≤ 95 HRB','7,9–8,0','25.000–80.000',7.95,25000,80000,170],
+['UHMWPE (copas articulares)','Biomédico (polimérico)','Grado médico, 23 °C','≈ 20–25','30–50','60–65 Shore D','0,93–0,94','Sin dato fiable (grado médico)',0.935,null,null,null]
+];
+const FAM=[
+['Metálicos','Enlace metálico: dúctiles, tenaces, conductores, fáciles de conformar y mecanizar.','Alta resistencia y tenacidad, buena fatiga, reparables y reciclables.','Corrosión (salvo inoxidables), densidad alta (salvo Al, Ti), requieren tratamiento para desgaste.','Ejes, engranajes, estructuras, carcasas, herramientas.','Fundición, forja, laminado, mecanizado, soldadura, tratamiento térmico.','Alta reciclabilidad; la producción primaria consume mucha energía.','Acero 1045, inox 304, Al 6061-T6, fundición gris.'],
+['Cerámicos','Enlaces iónico-covalentes: muy duros, refractarios, aislantes y frágiles.','Dureza, resistencia al desgaste y a temperatura, inercia química.','Fragilidad, baja tenacidad, sensibles a defectos, mecanizado costoso (rectificado con diamante).','Aislantes de horno, sellos mecánicos, toberas, rodamientos especiales, herramientas.','Sinterización de polvos, prensado, rectificado.','Muy durables; reciclaje limitado.','Alúmina, zirconia, carburo de silicio.'],
+['Poliméricos','Cadenas orgánicas: livianos, aislantes, resistentes a muchos químicos, propiedades sensibles a temperatura y tiempo.','Baja densidad, bajo costo, resistencia química, autolubricación (algunos), fácil moldeo.','Menor rigidez y resistencia, fluencia lenta (creep), límite de temperatura, absorción de humedad (PA).','Bujes, engranajes ligeros, tuberías, sellos, carcasas.','Inyección, extrusión, termoformado, mecanizado.','Termoplásticos reciclables; microplásticos y fin de vida son retos.','Nailon PA66, HDPE, PEEK, PTFE.'],
+['Compuestos','Combinan fibra o partículas con una matriz: propiedades a la medida y anisotropía.','Alta resistencia y rigidez por peso, resistencia a corrosión, diseño direccional.','Costo, anisotropía, delaminación, daño por impacto, reparación y reciclaje difíciles.','Aeronáutica, tanques, palas, herramientas de corte (WC-Co), carcasas.','Laminado manual, infusión, enrollamiento filamentario, sinterizado.','Reciclaje complejo; ventaja por ahorro de peso en uso.','GFRP, CFRP, WC-Co.'],
+['Biomédicos','Se definen por su uso en contacto con el cuerpo: biocompatibilidad, resistencia a fluidos y esterilización (vapor, óxido de etileno, radiación), además de resistencia mecánica y desgaste.','Seguridad biológica, estabilidad química, durabilidad en servicio.','Costos altos, certificación estricta, trazabilidad, fallas con consecuencias graves.','Prótesis de cadera y rodilla, tornillos, placas, componentes dentales.','Forja, fundición de precisión, mecanizado CNC, sinterización, pulido.','Uso de grado médico; fin de vida y reciclaje regulados.','Ti-6Al-4V ELI, 316L, Co-Cr, UHMWPE, alúmina y zirconia médicas.']
+];
+const EX=[
+{tag:'Comprender',q:'¿Qué indica el límite de fluencia de un acero?',o:[['La carga con la que se rompe la pieza','Eso es la resistencia máxima o de rotura, no la fluencia.'],['El esfuerzo desde el cual aparece deformación plástica permanente','Correcto: pasado σy, la pieza no recupera su forma al descargarse.',1],['El esfuerzo máximo que soporta en compresión','La fluencia no se define como el máximo en compresión.'],['La dureza superficial medida en HB','La dureza mide resistencia a la penetración; es otra propiedad.']]},
+{tag:'Comprender',q:'Se diseña una pieza de alúmina. ¿Qué datos usar en lugar de σy?',o:[['σy igual a la UTS, para simplificar','Eso inventa un valor: la alúmina rompe sin fluir.'],['Resistencia a flexión y a compresión, y tenacidad a la fractura','Correcto: son las propiedades alternativas apropiadas en cerámicas frágiles.',1],['Solo la densidad','Es necesaria para el peso, pero no describe la resistencia.'],['No se necesita ningún dato mecánico','Siempre se debe verificar la resistencia para evitar fractura.']]},
+{tag:'Calcular',q:'Pieza de acero de 2.000 cm³ con ρ = 7,85 g/cm³. ¿Cuál es su masa?',o:[['1,57 kg','Error de unidades: 2.000 × 7,85 = 15.700 g, no 1.570 g.'],['157 kg','Se omitió convertir de gramos a kilogramos correctamente.'],['15,7 kg','Correcto: 2.000 cm³ × 7,85 g/cm³ = 15.700 g = 15,7 kg.',1],['15,7 g','Olvidaste dividir entre 1000 al pasar a kg, o mezclaste unidades.']]},
+{tag:'Calcular',q:'Un acero con σy = 310 MPa trabaja a 100 MPa. ¿Cuál es el factor de seguridad respecto a fluencia?',o:[['0,32','Invertiste la relación: FS = σ límite / σ trabajo.'],['210','Restaste los esfuerzos; el FS es un cociente, no una diferencia.'],['3,1','Correcto: 310 / 100 = 3,1 (adimensional).',1],['31','Error de orden de magnitud al dividir.']]},
+{tag:'Analizar',q:'Para una pieza de 1.000 cm³, ¿qué afirmación es correcta al comparar aluminio 6061-T6 (2,70 g/cm³) y acero 1045 (7,85 g/cm³)?',o:[['Pesan casi lo mismo','No: ≈ 2,7 kg frente a ≈ 7,85 kg.'],['El aluminio pesa cerca de un tercio, aunque su σy es menor','Correcto: se aprecia la relación resistencia/peso; el diseño puede compensar con secciones mayores.',1],['Como σy es menor, el aluminio no sirve para estructuras','Se usa ampliamente en estructuras; depende de cargas y diseño.'],['El acero pesa tres veces menos','Está invertido.']]},
+{tag:'Justificar',q:'Un compañero propone alúmina para un martillo de impacto "por su dureza". ¿Cuál es la mejor réplica técnica?',o:[['Tiene razón: lo más duro siempre dura más','Dureza no es tenacidad: bajo impacto la alúmina puede fracturarse.'],['La alúmina es muy dura pero frágil; para impacto conviene un acero tenaz tratado térmicamente','Correcto: se debe priorizar tenacidad y resistencia a impacto sobre dureza extrema.',1],['La alúmina es segura porque no tiene fluencia','No tener fluencia significa que rompe sin deformación previa; es un riesgo.'],['La alúmina es ligera y por eso resiste golpes','Tiene densidad moderada, pero eso no mejora la tenacidad.']]}
+];
+const CS=[
+{tag:'Caso 1 · Eje',q:'Eje de transmisión de 40 mm en un reductor, 1.500 rpm, arranques frecuentes (flexión-torsión cíclicas), ambiente seco. Una falla detiene la línea y afecta a operarios. ¿Qué material eliges?',rub:'resistencia y tenacidad, fatiga, FS, mecanizado y tratamiento térmico',o:[['Acero AISI 1045','Buena combinación de resistencia, tenacidad y maquinabilidad; admite temple y revenido y soporta fatiga. Verifica FS y acabado superficial.',1],['Alúmina','Muy dura pero frágil: los arranques pueden fracturarla sin aviso y mecanizarla es costoso.'],['HDPE','σy de 20–30 MPa y bajo módulo: se deformaría y presentaría fluencia lenta.'],['Fundición gris A48','Frágil en tracción y con menor resistencia a fatiga por el grafito laminar; apta para bancadas, no para ejes.']]},
+{tag:'Caso 2 · Buje',q:'Buje en un transportador de alimentos, carga baja-moderada, 70 °C máximo, lavado frecuente, sin lubricación con grasas. ¿Qué eliges?',rub:'fricción, ausencia de lubricante, corrosión, temperatura y certificación alimentaria',o:[['Acero 1045 sin lubricar','Sin lubricación se desgasta y se agarra, y el lavado lo corroe.'],['Poliamida 66 modificada con lubricante sólido','Baja fricción, no se oxida y no requiere engrase. Hay que revisar absorción de humedad, límite de temperatura y certificación alimentaria.',1],['Alúmina','Resiste el desgaste, pero es frágil, difícil de mecanizar y costosa para un buje.'],['CFRP','Es caro y no está pensado para fricción deslizante en esta aplicación.']]},
+{tag:'Caso 3 · Tubería',q:'Línea de 200 m para ácido clorhídrico diluido a 25 °C y 6 bar. ¿Qué material es más razonable?',rub:'corrosión química, temperatura, presión y compatibilidad química',o:[['Acero al carbono','Se corroe con rapidez en ácido y contaminaría el fluido.'],['Aluminio 6061','El ácido clorhídrico ataca el aluminio.'],['HDPE (PE100)','Buena resistencia química a esta concentración, liviano y fácil de unir. Limitado en temperatura y presión; confirma tablas de compatibilidad.',1],['Fundición gris','Se corroe en medio ácido y es frágil.']]},
+{tag:'Caso 4 · Aislante',q:'Soporte aislante eléctrico y térmico dentro de un horno a 900 °C. ¿Qué material eliges?',rub:'temperatura, aislamiento eléctrico, fragilidad y choque térmico',o:[['Poliamida 66','Se funde alrededor de 260 °C.'],['Alúmina','Refractaria, aislante eléctrica y estable a esa temperatura. Es frágil: cuida el diseño, los apoyos y el choque térmico.',1],['HDPE','Se reblandece y funde muy por debajo de 900 °C.'],['Aluminio 6061','Conductor eléctrico y se ablanda y funde por debajo o cerca de esa temperatura.']]},
+{tag:'Caso 5 · Biomédico',q:'Vástago femoral de una prótesis de cadera: carga cíclica de varias veces el peso corporal, fluidos corporales, esterilización y vida útil de décadas. ¿Qué material?',rub:'biocompatibilidad, corrosión, fatiga, esterilización y consecuencias de la falla',o:[['Acero al carbono 1045','No es biocompatible ni resistente a la corrosión en fluidos corporales.'],['Ti-6Al-4V ELI','Buena resistencia a la fatiga, biocompatibilidad y a la corrosión, y baja densidad. Costo alto y requiere certificación y trazabilidad.',1],['HDPE','Resistencia insuficiente para soportar la carga del vástago; el UHMWPE se usa en copas articulares, no como vástago.'],['Alúmina monolítica','Se usa en cabezas femorales por su dureza, pero para un vástago su fragilidad es un riesgo.']]}
+];
+const RM=[['Acero inoxidable 304',1,'Resistente a la corrosión y a la limpieza, tenaz e higiénico; es la opción clásica. Mayor peso y costo que el acero al carbono.',4],['Aluminio 6061-T6',2,'Ligero, pero los detergentes clorados y alcalinos lo atacan; requiere anodizado o recubrimiento y cuida la compatibilidad.',2],['Acero 1045 pintado',0,'Barato, pero cualquier daño en la pintura inicia corrosión: higiene y vida útil comprometidas.',2],['HDPE (PE100)',8,'Resiste la corrosión, es liviano e higiénico, con buena tenacidad al impacto. Menor rigidez y límite de temperatura (60 °C exige verificar).',4],['GFRP',10,'Resistente a la corrosión y liviano, pero la superficie puede dañarse y retener suciedad; revisa la certificación alimentaria.',3],['Alúmina',4,'Muy frágil para golpes de carros y costosa para una carcasa grande.',1]];
+const RR=['Identifiqué las propiedades críticas (corrosión, impacto, temperatura, higiene).','Usé datos: densidad, masa por pieza y costo por kg.','Reconocí las limitaciones de mi material.','Analicé el riesgo y las consecuencias de una mala selección.','Indiqué cuándo otra alternativa sería preferible.'];
+const ALL={};EX.forEach((x,i)=>ALL['e'+i]=x);CS.forEach((x,i)=>ALL['c'+i]=x);
+const TOT=EX.length+CS.length+1,MAXP=EX.length*2+CS.length*2+4;
+let S={d:{},a:{},sc:{}};
+function stat(){const n=Object.keys(S.d).length,p=Object.values(S.sc).reduce((a,b)=>a+b,0);$('#pb').style.width=100*n/TOT+'%';$('#st').innerHTML=`Progreso: <b>${n}/${TOT}</b> actividades · Puntaje formativo: <b>${p}/${MAXP}</b> (no sustituye tu comprensión)`;$('#sy').innerHTML=n==TOT?'🎉 Completaste todas las actividades. Revisa en los ejercicios y casos los principios que te costaron más.':`Has completado ${n} de ${TOT} actividades. Termina las restantes para cerrar la secuencia.`}
+function show(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',i==j));document.querySelectorAll('#nav button').forEach((b,j)=>b.classList.toggle('on',i==j));scrollTo(0,0)}
+$('#nav').innerHTML=SEC.map((s,i)=>`<button onclick="show(${i})">${s}</button>`).join('');
+function drawQ(box,items,pre){$(box).innerHTML=items.map((it,i)=>{const id=pre+i;return `<div class="card"><span class="tag">${it.tag}</span><p><b>${it.q}</b></p>${it.o.map((o,j)=>`<button class="opt" data-id="${id}" data-j="${j}">${o[0]}</button>`).join('')}<div class="fb" id="fb${id}"></div>${it.rub?`<div id="rb${id}" hidden><br><b>Justifica tu decisión (2–3 líneas)</b><textarea placeholder="Menciona: ${it.rub}"></textarea><small>Tu justificación debe incluir: ${it.rub}.</small></div>`:''}</div>`}).join('')}
+document.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;const id=b.dataset.id,it=ALL[id],o=it.o[b.dataset.j],f=$('#fb'+id);if(S.d[id])return;S.a[id]=(S.a[id]||0)+1;if(o[2]){S.d[id]=1;S.sc[id]=S.a[id]==1?2:1;b.classList.add('ok');b.parentNode.querySelectorAll('.opt').forEach(x=>x.disabled=true);f.className='fb ok';f.innerHTML='✅ '+o[1];const r=$('#rb'+id);if(r)r.hidden=false}else{b.classList.add('bad');b.disabled=true;f.className='fb bad';f.innerHTML='❌ '+o[1]+' <i>Vuelve a intentarlo.</i>'}stat()});
+function rowsF(){return M.map((m,i)=>[m,i])}
+let fil='Todos';
+function drawT(){const k=$('#to').value;let r=rowsF().filter(([m])=>fil=='Todos'||m[1].startsWith(fil));if(k=='1')r.sort((a,b)=>a[0][8]-b[0][8]);if(k=='2')r=r.filter(x=>x[0][9]).sort((a,b)=>(a[0][9]+a[0][10])-(b[0][9]+b[0][10]));$('#tb').innerHTML=r.map(([m])=>`<tr>${[0,1,2,3,4,5,6,7].map(i=>`<td>${i==0?'<b>'+m[i]+'</b>':m[i]}</td>`).join('')}</tr>`).join('')}
+$('#tc').innerHTML=['Todos','Metálico','Cerámico','Compuesto','Polimérico','Biomédico'].map(f=>`<button class="btn ${f=='Todos'?'on':''}" onclick="fil='${f}';document.querySelectorAll('#tc button').forEach(b=>b.classList.toggle('on',b.textContent=='${f}'));drawT()">${f}</button>`).join('');
+$('#to').onchange=drawT;
+$('#ft').innerHTML=FAM.map((f,i)=>`<button class="btn" onclick="fam(${i})">${f[0]}</button>`).join('');
+function fam(i){const f=FAM[i];document.querySelectorAll('#ft button').forEach((b,j)=>b.classList.toggle('on',i==j));$('#fp').innerHTML=`<h3>${f[0]}</h3><p>${f[1]}</p><div class="grid"><div><b>Ventajas</b><p>${f[2]}</p></div><div><b>Limitaciones</b><p>${f[3]}</p></div><div><b>Aplicaciones</b><p>${f[4]}</p></div><div><b>Procesos</b><p>${f[5]}</p></div><div><b>Ambiente y vida útil</b><p>${f[6]}</p></div><div><b>Ejemplos</b><p>${f[7]}</p></div></div>`}
+function calc(){const m=M[$('#cm').value],v=+$('#cv').value||0,k=m[8]*v/1000;$('#cr').innerHTML=`Masa: <b>${k.toFixed(2)} kg</b> (ρ ≈ ${m[8]} g/cm³)<br>`+(m[9]?`Costo de materia prima: <b>${Math.round(k*m[9]).toLocaleString('es-CO')} – ${Math.round(k*m[10]).toLocaleString('es-CO')} COP</b> (estimación orientativa)`:'Costo: sin dato fiable de COP/kg para este material.')}
+function fs(){const m=M[$('#fm').value],s=(+$('#ff').value)/(+$('#fa').value),n=m[11]/s;$('#fr').innerHTML=`σ de trabajo = <b>${s.toFixed(1)} MPa</b> · σy mínimo ≈ ${m[11]} MPa · FS ≈ <b>${n.toFixed(2)}</b><br>`+(n<1?'⚠️ FS < 1: la pieza fluiría. Aumenta el área o cambia de material.':n<1.5?'⚠️ Margen muy bajo; solo se justifica con cargas muy bien conocidas y normas que lo permitan.':'Margen aceptable según la incertidumbre y la consecuencia de la falla; verifica fatiga y normas.')}
+$('#cm').innerHTML=M.map((m,i)=>`<option value="${i}">${m[0]}</option>`).join('');
+$('#fm').innerHTML=M.map((m,i)=>m[11]?`<option value="${i}">${m[0]}</option>`:'').join('');
+['#cm','#cv'].forEach(s=>$(s).oninput=calc);['#fm','#ff','#fa'].forEach(s=>$(s).oninput=fs);
+$('#rm').innerHTML+=RM.map((r,i)=>`<option value="${i}">${r[0]}</option>`).join('');
+$('#rm').onchange=()=>{const v=$('#rm').value;if(v==='')return;const r=RM[v],m=M[r[1]],k=m[8]*3;$('#rc').innerHTML=`Masa por pieza: <b>${k.toFixed(1)} kg</b> · Lote de 200: <b>${(k*200).toFixed(0)} kg</b><br>`+(m[9]?`Materia prima por pieza: ${Math.round(k*m[9]).toLocaleString('es-CO')} – ${Math.round(k*m[10]).toLocaleString('es-CO')} COP (sin fabricación ni acabado)`:'Costo de materia prima sin dato fiable.')};
+function drawR(){$('#rr').innerHTML=RR.map((t,i)=>`<label><input type="checkbox" class="rk"> ${t}</label><br>`).join('')}
+function reto(){const v=$('#rm').value,j=$('#rj').value.trim(),a=$('#ra').value.trim(),f=$('#rf');if(v===''||j.length<60||a.length<20){f.className='fb bad';f.textContent='Elige un material, escribe una justificación (mínimo 60 caracteres) y una condición alternativa (mínimo 20).';return}const r=RM[v],c=[...document.querySelectorAll('.rk')].filter(x=>x.checked).length;S.d.reto=1;S.sc.reto=r[3];f.className='fb ok';f.innerHTML=`<b>Valoración de tu elección:</b> ${r[2]}<br><b>Autoevaluación:</b> cumples ${c} de ${RR.length} criterios. Contrasta tu justificación con los puntos que no marcaste y reenvía si quieres mejorarla. Opciones razonables: inox 304 o HDPE, según presupuesto, rigidez y verificación de temperatura.`;stat()}
+function resetAll(){if(!confirm('¿Reiniciar toda la actividad?'))return;S={d:{},a:{},sc:{}};drawQ('#ex',EX,'e');drawQ('#cs',CS,'c');$('#rm').value='';$('#rj').value='';$('#ra').value='';$('#rf').textContent='';$('#rc').textContent='Selecciona un material para ver masa y costo por pieza y por lote.';drawR();fil='Todos';drawT();stat();show(0)}
+drawQ('#ex',EX,'e');drawQ('#cs',CS,'c');drawR();drawT();fam(0);calc();fs();stat();show(0);
+</script>
+</body>
+</html>
